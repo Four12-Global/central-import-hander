@@ -384,7 +384,7 @@ function logImportResultsToSheet(data, logSheetName) {
          const cacheKey = cacheKeyPrefix + importId; // Construct the specific cache key
 
          const resultsData = {
-             status: 'completed', // Mark as complete
+             status: 'complete', // Mark as complete
              importId: importId,
              created: data.posts_created || 0, updated: data.posts_updated || 0,
              deleted: data.posts_deleted || 0, skipped: data.posts_skipped || 0,
