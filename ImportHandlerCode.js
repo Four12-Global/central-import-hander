@@ -33,37 +33,62 @@ const CACHE_EXPIRATION_SECONDS = 21600; // 6 hours
 // Central configuration mapping a logical type name (e.g., 'sessions')
 // to its specific settings like sheet names and cache prefix.
 const CONFIG = {
-  'sessions': {
-     type: 'sessions',                // User-friendly type name
-     importLogSheet: 'sessions_wp_import_logs',    // Sheet for structured import results
-     verifySheet: 'sessions_wp_callback_data',   // Sheet for raw callback data & errors
-     cachePrefix: 'import_status_'    // Prefix for CacheService keys for this type
-     // Add any other type-specific settings if needed later
+  sessions: {
+    type: 'sessions',                    // User-friendly type name
+    importLogSheet: 'sessions_wp_import_logs',      // Sheet for structured import results
+    verifySheet: 'sessions_wp_callback_data',       // Sheet for raw callback data & errors
+    cachePrefix: 'import_status_'        // Prefix for CacheService keys for this type
+    // Add any other type-specific settings if needed later
   },
-  'events': {
-     type: 'events',
-     importLogSheet: 'Events_Import_Logs',
-     verifySheet: 'WP_Plugin_Data_Received', // Name from original code
-     cachePrefix: 'import_status_'     // Can share prefix if IDs are distinct
+
+  events: {
+    type: 'events',
+    importLogSheet: 'Events_Import_Logs',
+    verifySheet: 'WP_Plugin_Data_Received',         // Name from original code
+    cachePrefix: 'import_status_'                   // Can share prefix if IDs are distinct
   },
+
+  venues: {
+    type: 'venues',
+    importLogSheet: 'venues_wp_import_logs',
+    verifySheet: 'venues_wp_callback_data',
+    cachePrefix: 'import_status_'
+  },
+
+  partners: {
+    type: 'partners',
+    importLogSheet: 'partners_wp_import_logs',
+    verifySheet: 'partners_wp_callback_data',
+    cachePrefix: 'import_status_'
+  },
+
+  congregations: {
+    type: 'congregations',
+    importLogSheet: 'cong_wp_import_logs',
+    verifySheet: 'cong_wp_callback_data',
+    cachePrefix: 'import_status_'
+  },
+
   // --- Add other content types as needed ---
   /*
-  'products': {
-     type: 'products',
-     importLogSheet: 'products_wp_import_logs',
-     verifySheet: 'products_wp_callback_data',
-     cachePrefix: 'import_status_product_' // Example of a different prefix
-  }
+  products: {
+    type: 'products',
+    importLogSheet: 'products_wp_import_logs',
+    verifySheet: 'products_wp_callback_data',
+    cachePrefix: 'import_status_product_' // Example of a different prefix
+  },
   */
+
   // --- Fallback/Error Sheets ---
   // These are used if routing fails or critical errors occur before routing.
-  'unknown': {
-      type: 'unknown',
-      verifySheet: 'Unknown_Import_Callbacks' // Log callbacks with unknown IDs here
+  unknown: {
+    type: 'unknown',
+    verifySheet: 'Unknown_Import_Callbacks'   // Log callbacks with unknown IDs here
   },
-  'fatal': {
-      type: 'fatal',
-      verifySheet: 'Fatal_Error_Callbacks' // Log callbacks that cause critical script errors
+
+  fatal: {
+    type: 'fatal',
+    verifySheet: 'Fatal_Error_Callbacks'      // Log callbacks that cause critical script errors
   }
 };
 
@@ -72,13 +97,11 @@ const CONFIG = {
 // Maps the numerical WP All Import ID received from the PHP plugin
 // to the key used in the CONFIG object above (e.g., 'sessions', 'events').
 const WP_IMPORT_ID_TO_CONFIG_KEY = {
-   // -- Sessions --
    '31': 'sessions', 
-
-   // -- Events --
    '30': 'events',   
-
-   // -- Add other mappings --
+   '18': 'venues',
+   '16': 'partners',
+   '15': 'congregations',
    // 'YOUR_PRODUCT_IMPORT_ID_STRING': 'products',
 };
 
